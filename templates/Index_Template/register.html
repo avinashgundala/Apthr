@@ -1,0 +1,24 @@
+{% extends "Base_Template/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form  method="POST" enctype="multipart/form-data" >
+  {% csrf_token %}
+  <div class="">
+    First Name : {{ u_form.first_name }}
+  </div>
+  <div class="">
+    Last Name : {{ u_form.last_name }}
+  </div>
+  <div class="">
+    Email : {{ u_form.email }}
+  </div>
+  <div class="">
+    {{ u_form.password1 }}
+  </div>
+  <div class="">
+    {{ u_form.password2 }}
+  </div>
+  {{ p_form|crispy }}
+  <button type="submit" name="button">submit</button>
+</form>
+{% endblock %}
