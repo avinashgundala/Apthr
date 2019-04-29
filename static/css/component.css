@@ -1,0 +1,85 @@
+.js .inputfile {
+    width: 1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile + label {
+    max-width: 170px;
+    font-size: 16px;
+    /* 20px */
+   text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+     overflow: hidden;
+   /* padding: 6px 1.25rem;*/
+    /* 10px 20px */
+	border-radius:10px;
+	margin-left:7px;
+}
+
+.no-js .inputfile + label {
+    display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 0;
+}
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
+}
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -4px;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+/* style 1 */
+
+.inputfile-1 + label {
+    color: #5bc0de;
+   /* background-color: #5bc0de;*/
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+    /*background-color: #5bc0de;*/
+}
+
+
+ .register-upload .inputfile-1 + label {
+    color: #fff;
+    background-color: #102229;
+    padding: 9px 17px !important;
+    font-size: 12px !important;
+    min-width: 162px;
+    font-weight: 600 !important;
+    text-align: center;
+}
+.register-upload .inputfile + label {
+    max-width: 170px;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-left: 7px;
+}
+
+.register-upload .inputfile + label svg{
+    margin-top: -4px;
+}

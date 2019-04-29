@@ -1,0 +1,30 @@
+{% extends 'Base_Template/base.html' %}
+{% load static %}
+{% block content %}
+<section  class="vertical-center content-height">
+    <div class="block remove-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="account-popup-area signup-popup-box static">
+                        <div class="account-popup box-shadow">
+							<h3>Mail Sent</h3>
+							<span class="text-justify" style="text-align: justify;">We've emailed you instructions for setting your password, if an account exists with the email you entered. You should receive them shortly.</span><br><br>
+							<span  class="text-justify" style="text-align: justify;">If you don't receive an email, please make sure you've entered the address you registered with, and check your spam folder.</span>
+                        </div>
+                    </div><!-- SIGNUP POPUP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    section{
+        display: flex;
+  align-items: center;
+    }
+    .footeraptaloc{
+        margin-left: -10%;
+    }
+</style>
+{% endblock %}

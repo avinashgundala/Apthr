@@ -2,6 +2,11 @@ User_Type= (
 	('Admin', 'Admin'),
 	('Employer', 'Employer'),
 )
+Company_Type = (
+     ('', 'Select Company Type'),
+     ('Consultancy','Consultancy'),
+	 ('Company','Company'),
+)
 Industry_Choices = (
     ('', 'Select Industry Type'),
     ('IT','IT'),
@@ -19,6 +24,14 @@ Industry_Choices = (
     ('Hospitality','Hospitality'),
     ('Legal','Legal'),
 )
+Subject_Type = (
+        ('','Choose a Subject'),
+		('Suggestions','suggestions'),
+		('Compliment','Compliment'),
+		('Bug','Bug'),
+		('Question','Question'),
+)
+
 Country_Choices = (
 	('', 'Select Country Code'),
 	('+213', 'Algeria (+213)'),

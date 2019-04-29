@@ -1,0 +1,84 @@
+/*------------------------------------------------------------------
+Background Color
+-------------------------------------------------------------------*/
+.bg-color,
+.account-popup > form button,
+.layer.color::before,
+.pricetable > a,
+.pricetable.active,
+.bottom-line.style2{
+    background-color: #19adc2 ;
+}
+
+/*------------------------------------------------------------------
+Text Color
+-------------------------------------------------------------------*/
+.text-color,
+.pricetable-head h2,
+.pricetable.active > a{
+    color: #141f72;
+}
+
+/*------------------------------------------------------------------
+Border Color
+-------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------
+COLOR SCHEME 2
+-------------------------------------------------------------------*/
+
+.forsticky.sticky .post-job-btn{
+	border: 2px solid #19adc2;
+	background: transparent; color: #fb236a;
+}
+.post-job-btn:focus{
+	color:#fff !important;
+}
+.post-job-btn{
+    background-color: #19adc2 ; border: 2px solid #19adc2;
+    max-width: 250px;
+    margin-top: 4px;
+}
+
+
+.bg-color,
+.post-job-btn,
+.account-popup .close-popup,
+.blog-metas a::before{
+    background-color: #19adc2 ;
+}
+
+/*------------------------------------------------------------------
+Text Color
+-------------------------------------------------------------------*/
+.text-color,
+.menu-sec nav > ul > li > ul li:hover > a,
+.account-popup > form .cfield i,
+.account-popup > form > a,
+.chosen-container-single .chosen-single div::before,
+.job-field i,
+.chosen-container .chosen-results li.highlighted,
+.active-result.result-selected,
+.scroll-to a,
+.p-category > a p,
+.p-category:hover i,
+.job-title-sec span,
+.blog-metas a,
+.blog-details > a{
+    color: #19adc2 ;
+}
+
+/*------------------------------------------------------------------
+Border Color
+-------------------------------------------------------------------*/
+.border-color,
+.select-user > span.active,
+.browse-all-cat a{
+    border-color: #19adc2 ;
+}
+.select-user > span.active a{
+	background:#19adc2 ;
+	border-color: #19adc2 ;
+	color:#fff;
+}

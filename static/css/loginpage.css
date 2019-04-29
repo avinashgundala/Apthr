@@ -1,0 +1,155 @@
+ body{
+        background-color: #211E1E;
+    }
+
+    .card-block {
+        flex: 1 1 auto;
+        padding: 1.25rem;
+    }
+
+        .login.card {
+
+    background-image: url(/static/static/images/bg.jpg);
+    /* background-position: 10px 10px; */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.login-sec{
+    background-color: #f7f7f7;
+}
+
+.sidebg {
+                background-size: 100% 100%;
+                background-image: url(/static/static/images/rawpixel-620227-unsplash.jpg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                height: 100%;
+                position: relative;
+                z-index: 1;
+            }
+            .sidebg::before{
+                    content: "";
+                display: block;
+                position: absolute;
+                z-index: -1;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background: #0000007a;
+            }
+        .form-control{
+            background:transparent;
+            border-radius: 20px;
+        }
+        .btn-login{
+            color: #FFF;
+            border: 0;
+            border-radius: 20px;
+            
+            background: #0fedfe; 
+            background: -moz-linear-gradient(-45deg, #0fedfe 15%, #4fadfe 98%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(-45deg, #0fedfe 15%,#4fadfe 98%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(135deg, #0fedfe 15%,#4fadfe 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0fedfe', endColorstr='#4fadfe',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+            width: 50%;
+            clear: both;
+            margin: auto;
+       }
+        
+        .user-icon{
+                margin-bottom: 50px !important;
+        }
+        .user-bgicon{
+                background-image: url(/static/static/images/usernew.png);
+                background-repeat: no-repeat;
+                background-position: 10px 7px;
+                background-size: 18px;    
+                       padding-left: 35px;       
+        }
+        .pwd-bgicon{
+                background-image: url(/static/static/images/locked-padlock.png);
+                background-repeat: no-repeat;
+                background-position: 10px 7px;
+                background-size: 18px;
+                       padding-left: 35px;
+        }
+        .forget_pwd{
+            text-decoration:none;
+            color: #2476bd;
+            margin-left: 10px;
+        }
+         @media(min-width:768px) and (max-width: 990px){
+            .sidebg{
+                 min-height: 290px;                 
+             }
+             .login-sec{
+                margin-top: 20px;
+             }
+         }
+
+        @media(max-width: 768px) {
+             .sidebg{
+                 min-height: 200px;
+             }
+             .login-sec{
+                margin-top: 20px;
+             }
+        }
+
+        .header {
+    padding: 1em 0;
+    background: rgba(0,0,0,.78);
+    /*position: fixed;*/
+    z-index: 9999;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+.copy-right-grids {
+    padding: 20px 0px;
+    background: #211E1E;
+}
+p.footer-gd {
+    color: #ffffff;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-align: center;
+        margin-bottom: 0;
+}
+.w3_agile_logo {
+    float: left;
+}
+.w3_agile_logo h1 a {
+    font-size: .6em;
+    color: #ffffff;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+}
+.w3_agile_logo h1 a span {
+    /* font-size: 2em; */
+    color: #68d0ff;
+    /* text-shadow: 0px 3px 1px #d93920; */
+}
+.footer-gd span {
+    color: #68d0ff;
+}
+
+@media (min-width: 768px){
+    .page-container {
+        height: 77.4%;
+    }
+}
+
+
+.user-details .form-group{
+    margin-bottom: 10px;
+}
+
+.mrb0_t20{
+    margin-bottom: 0px;
+    margin-top: 20px;
+}

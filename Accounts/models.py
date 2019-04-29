@@ -1,6 +1,7 @@
 from django.db import models
+from django.conf import settings
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser,BaseUserManager
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,6 +19,8 @@ from datetime import datetime, timedelta
 
 ########### import choices ########
 from Accounts.choices import *
+
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 
@@ -53,26 +56,6 @@ class UserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
         return self._create_user(email, password, **extra_fields)
 
-    ''' def email_user(self, subject, message, from_email=None, **kwargs):
-
-         Employer_Email = instance_job.User.email
-         message = render_to_string('Job_Search/new_job_application_email.html',{
-                   'domain': current_site.domain,
-                   'instance_job' :instance_job,
-                   'instance_user' : request.user,
-                   'instance_Employee_Job_Apply':instance_Employee_Job_Apply,
-                 })
-         mail_subject = "New Application : "+ instance_job.Job_Title +"( Job ID :"+ str(instance_job.id) +" ) job"
-         email = EmailMultiAlternatives(
-                     mail_subject, message, to=[Employer_Email]
-                     )
-         email.attach_alternative(message, "text/html")
-         email.send()
-
-        send_mail(subject, message, from_email, [self.email], **kwargs)'''
-
-
-
 class User(AbstractUser):
 
     username = None
@@ -81,7 +64,7 @@ class User(AbstractUser):
     last_name = models.CharField(_('last name'), max_length=250)
     user_type = models.CharField(max_length=20, choices=User_Type, default='Admin')
     email_confirmed = models.BooleanField(default = False)
-    agree = models.BooleanField(default= False)
+    agree = models.BooleanField(default= True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name',]
@@ -99,17 +82,36 @@ class UserProfile(models.Model):
     profile_pic = models.ImageField(upload_to='ProfileImage')
     industry = models.CharField(max_length= 200,choices=Industry_Choices)
     company_name = models.CharField(max_length=200)
-    company_size = models.CharField(max_length=200,choices=Company_Size_Choices)
-    address = models.TextField()
-    state = models.CharField(max_length=50)
+    #company_size = models.CharField(max_length=200,choices=Company_Size_Choices)
+    #address = models.TextField()
+    #state = models.CharField(max_length=50)
     city = models.CharField(max_length = 50)
     postcode = models.CharField(max_length = 50)
     country = models.CharField(max_length= 50,choices=Country_Choices)
     company_logo = models.ImageField()
+    company_type = models.CharField(max_length = 50,choices = Company_Type)
+    contact_no = models.CharField(max_length = 10)
 
     def __str__(self):
         return "%s" %(self.user)
 
+class FeedBack(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete= models.CASCADE,null = True,blank =True)
+    name = models.CharField(max_length = 50)
+    email = models.EmailField()
+    rating = models.IntegerField(validators=[ MinValueValidator(1), MaxValueValidator(5)])
+    subject = models.CharField(max_length= 50,choices=Subject_Type)
+    message = models.TextField()
+
+#-------- contact Us ----------------#
+'''class ContactUs(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete = models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    country_code = models.CharField(max_length =50,choices = Country_Choice)
+    mobile = models.
+    subject = models.CharField(max_length=200)
+    message = models.TextField()'''
 
 ## when create user create his profile
 @receiver(post_save, sender=User)

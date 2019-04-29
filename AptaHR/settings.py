@@ -127,7 +127,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # AUTH USER MODEL
-AUTH_USER_MODEL = "Accounts.User"
+AUTH_USER_MODEL = 'Accounts.User'
 
 LOGIN_URL = '/login/'
 

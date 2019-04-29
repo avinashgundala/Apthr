@@ -1,0 +1,43 @@
+{% extends 'Base_Template/base.html' %}
+{% load static %}
+{% block content %}
+<section  class="vertical-center content-height">
+    <div class="block remove-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="account-popup-area signup-popup-box static">
+                        <div class="account-popup box-shadow">
+							<h6>{% for message in messages %}
+									{% if 'error' == message.tags %}
+									Your verification link has expired .Please click below to generate a new verification link
+									{% else %}
+									Your account has been activated successfully.
+									{% endif %}
+									{% endfor %}</h6>
+							<span>{% for message in messages %}
+									{% if 'error' == message.tags %}
+										<!-- <p class="text-danger text-center" style="text-align: justify;margin-bottom: 18px">{% autoescape off %}{{ message }}{% endautoescape %}</p> -->
+                                        <a href="{% url 'register_resent_active' %}"> <button type="button">Resend verification email</button></a>
+                                    {% else %}
+										<!--<p class="text-success text-center" style="text-align: justify;margin-bottom: 18px">{% autoescape off %}{{ message }}{% endautoescape %}</p>-->
+                                        <a href="{% url 'landingpage' %}"> <button type="button">Login</button></a>
+                                    {% endif %}
+								{% endfor %}</span>
+                        </div>
+                    </div><!-- SIGNUP POPUP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    section{
+        display: flex;
+  align-items: center;
+    }
+    .footeraptaloc{
+        margin-left: -10%;
+    }
+</style>
+{% endblock %}

@@ -1,19 +1,171 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">
-       {{message}}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% block content %}
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>AptaHR</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="CreativeLayers">
+	<link rel="shortcut icon" type="image/png" href="/static/images/favicon.ico"/>
 
+	<!-- Styles -->
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-grid.css" />
+	<link rel="stylesheet" href="/static/css/circle.css">
+	<link rel="stylesheet" href="/static/css/icons.css">
+	<link rel="stylesheet" href="/static/css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/chosen.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/colors/colors.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/component.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+</head>
+<body>
+
+<div class="page-loading">
+	<img src="/static/images/loader.gif" alt="" />
+	<span>Skip Loader</span>
+</div>
+
+<div class="theme-layout" id="scrollup">
+	{% if request.path == '/' or request.path == '' %}
+	<div class="position-absolute w-100">
+	{% endif %}
+	<div class="responsive-header">
+		<div class="responsive-menubar">
+			<div class="res-logo"><a href="/" title=""><img src="/static/images/aptahr.png" alt="" /></a></div>
+			<div class="menu-resaction">
+				<div class="res-openmenu">
+					<img src="/static/images/menu.png" alt="" />
+				</div>
+				<div class="res-closemenu">
+					<img src="/static/images/menu.png" alt="" />
+				</div>
+			</div>
+		</div>
+		<div class="responsive-opensec">
+			<div class="responsivemenu">
+				<ul>
+					<li class="">
+						<a href="/" title="">Home</a>
+					</li>
+					<li class="">
+						<a href="/pricing/" title="">Pricing</a>
+					</li>
+					<li class="">
+						<a href="/contactus/" title="">Contact</a>
+					</li>
+					<li>
+						<a href="/accounts/Employer/postajob/"> Post Jobs</a>
+					</li>
+					<li class="">
+						<a href="/?Login=True" title="">Login</a>
+					</li>
+					<li  class="">
+						<a href="/Registration/" title=""> Sign Up</a>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+	</div>
+	{% if 'Candidate_Snapshot' in request.path %}
+	<header class="stick-top">
+	{% else %}
+	<header class="gradient">
+	{% endif %}
+		<div class="menu-sec">
+			<div class="container base-container">
+				<div class="btn-extars">
+					<ul class="account-btns">
+						{% if request.path == '/' or request.path == '' %}
+						<li><a href="javascript:void(0);" data-toggle="modal" data-target="#login_p" title=""> Login</a></li>
+						{% else %}
+						<li><a href="{% url 'landingpage' %}?Login=True"> Login</a></li>
+						{% endif %}
+						<li><a href="{% url 'register' %}" title=""><i class="la la-key"></i> Sign Up</a></li>
+						<li><a href="/contactus/" title=""> Contact</a></li>
+						<!-- <li><a href="/locations/" title=""> Locations</a></li> -->
+					</ul>
+					<a href="/accounts/Employer/postajob/" title="" class="post-job-btn"><i class="la la-plus"></i>Post Jobs</a>
+
+				</div><!-- Btn Extras -->
+				<div class="logo">
+					<a href="/" title=""><img src="/static/images/aptahr.png" alt="" /></a>
+				</div><!-- Logo -->
+
+				<nav>
+					<ul>
+						<li class="menu-item-has-children">
+							<a href="/" title="">Home</a>
+						</li>
+						<li class="menu-item-has-children">
+							<a href="/pricing/" title="">Pricing</a>
+						</li>
+					</ul>
+				</nav><!-- Menus -->
+			</div>
+		</div>
+    </header>
+	{% if request.path == '/' or request.path == '' %}
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-lg-6">
+			<img src="static/images/linked.jpg" class="w-100" style="min-height: 450px;margin-top: 70px;">
+		</div>
+		<div class="col-md-6 col-lg-6">
+		<img src="static/images/hrgif.gif" class="w-100" style="min-height: 450px;margin-top: 70px;">
+		</div>
+	</div>
+	{% endif %}
+    {% block content %}
     {% endblock %}
-  </body>
+    {% block footer %}
+    <footer>
+
+		<div class="bottom-line">
+			<div class="container-fluid">
+				<span style="display: inline-block;" class="xs-ml-0 footerbranch">
+					<label style="display:inline;font-size: 16px"><a href="http://www.aptagrim.com" target="_blank">Aptagrim consulting</a></label><br>
+					 	SINGAPORE | UK | INDIA
+				</span>
+				<span class="footercopyrights">© 2018 <label><a href="http://www.aptagrim.com" target="_blank">Aptagrim</a></label> | All rights reserved.</span>
+				<a href="#scrollup" class="scrollup" title=""><i class="la la-arrow-up"></i></a>
+			</div>
+		</div>
+	</footer>
+	{% endblock %}
+
+</div>
+{% block model %}
+{% endblock %}
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/js/modernizr.js" type="text/javascript"></script>
+<script src="/static/js/script.js" type="text/javascript"></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/static/js/wow.min.js" type="text/javascript"></script>
+<script src="/static/js/slick.min.js" type="text/javascript"></script>
+<script src="/static/js/parallax.js" type="text/javascript"></script>
+<script src="/static/js/select-chosen.js" type="text/javascript"></script>
+<script src="/static/js/custom-file-input.js"></script>
+<script src="/static/js/custom.js"></script>
+
+<script>
+	$(document).ready(function(){
+		var maxHeight = 0;
+		$(".pricingul").each(function() {
+				maxHeight = Math.max($(this).height(),maxHeight);
+		});
+		$(".pricingul").css('height', maxHeight);
+	});
+
+</script>
+
+{% block java_script %}
+{% endblock %}
+</body>
 </html>

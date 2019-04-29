@@ -1,0 +1,73 @@
+{% extends 'Base_Template/base.html' %}
+{% load static %}
+{% block content %}
+<section  class="vertical-center content-height">
+    <div class="block remove-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="account-popup-area signup-popup-box static">
+                        <div class="account-popup box-shadow">
+							<h3>Resend Activation Email</h3>
+							<span>Enter Your Registered Email ID to get resend activation link.</span>
+							<form  class="form-horizontal form-signin" method="post">
+								{% csrf_token %}
+                                <div class="registration-sec-blk1">
+                                    <div class="cfield">
+											<!--<input type="email" name="email" autofocus maxlength="254" required id="id_email" class="input form-control normalinput "/>-->
+                                     {{ activationform.email }}
+                                    <i class="la la-envelope"></i>
+                                    </div>
+                                    <div style="float: left;width: 100%;position: relative;">
+                                        <button type="submit">Submit</button>
+                                    </div>
+                                </div>
+							</form>
+                        </div>
+                    </div><!-- SIGNUP POPUP -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    section{
+        display: flex;
+  align-items: center;
+    }
+    .footeraptaloc{
+        margin-left: -10%;
+    }
+</style>
+<div class="modal fade file-error-modal" id="message-popup" tabindex="-1" role="dialog" aria-labelledby="cv-type-error-modal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="border:0">
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if 'error' == message.tags %}
+                            <div class="{{ message.tags }} alert alert-danger">{% autoescape off %}{{ message }}{% endautoescape %}</div>
+                        {% else %}
+                            <div class="{{ message.tags }} alert alert-success">{% autoescape off %}{{ message }}{% endautoescape %}</div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block java_script %}
+{% if messages %}
+<script>
+	setTimeout(function(){$('#message-popup').modal('show');}, 0);
+	$('#message-popup').modal({backdrop: 'static', keyboard: false});
+</script>
+{% endif %}
+{% endblock %}

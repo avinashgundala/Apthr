@@ -1,24 +1,718 @@
 {% extends "Base_Template/base.html" %}
-{% load crispy_forms_tags %}
 {% block content %}
-<form  method="POST" enctype="multipart/form-data" >
-  {% csrf_token %}
-  <div class="">
-    First Name : {{ u_form.first_name }}
-  </div>
-  <div class="">
-    Last Name : {{ u_form.last_name }}
-  </div>
-  <div class="">
-    Email : {{ u_form.email }}
-  </div>
-  <div class="">
-    {{ u_form.password1 }}
-  </div>
-  <div class="">
-    {{ u_form.password2 }}
-  </div>
-  {{ p_form|crispy }}
-  <button type="submit" name="button">submit</button>
-</form>
+<style>
+		/***** for register button tooltip  ******/
+        .tooltip1 {
+            position: relative;
+            opacity: 1;
+        }
+
+        .tooltip1 .tooltiptext1 {
+            visibility: hidden;
+            width: 280px;
+            background-color: #fb8585;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            top: 90px;
+            right: 60px;
+        }
+
+        .tooltip1:hover .tooltiptext1 {
+            visibility: visible;
+        }
+
+
+        /***** for next button tooltip  ******/
+
+        .empbtn-next-tooltip {
+            position: relative;
+            display: inline;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .empbtn-next-tooltip .tooltipbtnerrortext  {
+            visibility: hidden;
+            width: 193px;
+            background-color: #fb8585;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 15px 0;
+            position: absolute;
+            z-index: 1;
+            right: -42px;
+            bottom: -13px;
+        }
+
+        .empbtn-next-tooltip:hover .tooltipbtnerrortext  {
+            visibility: visible;
+        }
+        .footerbranch{
+            margin-left: 7%;
+        }
+
+    </style>
+
+
+	<section>
+		<div class="block remove-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="account-popup-area signup-popup-box static">
+							<div class="account-popup">
+								<h3>Sign Up</h3>
+                <form method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+
+                  <!-- {{form.as_p}} -->
+									<label style="font-weight: normal;font-size: 16px" class="helptext error" id="common-error"></label>
+									<div class="registration-sec-blk1">
+										<p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+                      <p>{{u_form.first_name}}</p>
+                      <label class="error" id="firstname_message" for="id_first_name"></label>
+											<i class="la la-user"></i>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+										  <p>{{ u_form.last_name }}</p>
+	    								<label id="lastname_message" for="id_last_name" class="error"></label>
+											<i class="la la-user"></i>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+										  <p>{{ u_form.email }}</p>
+											<label class="error" id="email_message" for="id_email"></label>
+											<i class="la la-envelope"></i>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+											<input type="password" class="commonpasswordfield" name="password1" required="" id="id_password1" placeholder="********" />
+                      <div class="aro-pswd_info" style="position:relative">
+                        <div id="pswd_info">
+                          <h4>Password must be requirements</h4>
+                          <ul>
+                              <li id="letter" class="invalid">At least <strong>one lowercase letter</strong></li>
+                              <li id="capital" class="invalid">At least <strong>one uppercase letter</strong></li>
+                              <li id="number" class="invalid">At least <strong>one number</strong></li>
+                              <li id="length" class="invalid">Be at least <strong>8 characters</strong></li>
+                              <li id="space" class="invalid">be<strong> use [~,!,@,#,$,%,^,&,*,-,=,.,;,']</strong></li>
+                          </ul>
+                        </div>
+                      </div>
+                      <label class="error" id="lblisvalidpassworderr"></label>
+                      <i toggle="#id_password1" class="fa fa-fw fa-eye-slash field-icon toggle-password"></i>
+                      <label class="error" id="password_message1" for="id_password1"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+											<input type="password" class="commonpasswordfield" name="password2" required="" id="id_password2" placeholder="********" />
+                     	<i toggle="#id_password2" class="fa fa-fw fa-eye-slash field-icon toggle-password"></i>
+											<label class="error" id="password_message2" for="id_password2"></label>
+										</div>
+										<div style="float: left;width: 100%;position: relative;">
+											<div class="tooltip empbtn-next-tooltip">
+												<button id="basicinfo_sub" class="btn-next btn-next1" type="button">Next</button>
+												<span class="tooltipbtnerrortext" style="display: block;">Please correct above errors</span>
+											</div>
+										</div>
+									</div>
+									<div class="registration-sec-blk2">
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+										  <p> {{ p_form.company_name }} </p>
+											<i class="la la-building"></i>
+											<label class="error"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="dropdown-field custom-select-style">
+                      <p>{{ p_form.company_type }}</p>
+											<label class="error"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="dropdown-field custom-select-style">
+                      <p>{{ p_form.industry }}</p>
+											<label class="error"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+									  <p> {{ p_form.city}} </p>
+                  		<i class="la la-map-marker"></i>
+											<label class="error"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+										<div class="cfield">
+										<p> {{p_form.postcode}}</p>
+											<i class="la la-building"></i>
+											<label class="error"></label>
+										</div>
+                    <p class="requiredsign" style=""><span>*</span></p>
+                      <div class="cfield">
+                        <div class="row">
+                          <div class="col-6 custom-select-style contact-select regi-select-cont">
+                            {{ p_form.country }}
+                          </div>
+                          <div class="col-6">
+                            {{ p_form.contact_no}}
+                            <i class="la la-phone"></i>
+                          </div>
+                          </div>
+                          <label style="margin: 0" class="error"></label>
+                      </div>
+										<div style="margin-bottom:19px">
+											<span class="js">
+												<span class="box">
+										        {{ p_form.company_logo }}
+												    <label id="lblfile-1" for="id_company_logo"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg> <span>Upload Logo</span></label>
+												</span>
+											</span>
+										</div>
+										<p class="remember-label common-chk-style">
+                      {{ u_form.agree }} <label for="id_agree">I Agree to Terms & Conditions<sup>*</sup></label>
+                    </p>
+                    <div class="cfield" style="border: 1px solid transparent;            margin-bottom: 0;">
+                      <button class="btn-prev2" style="float: left !important;">Back</button>
+                      <div style="float: right;position: relative;">
+                          <div class="tooltip1">
+                              <button id="register-frm-sub" type="submit" class="btn-next">Register</button>
+                              <span class="tooltiptext1">Please upload the Company Logo</span>
+                          </div>
+                      </div>
+                    </div>
+									</div>
+								</form>
+							</div>
+						</div><!-- SIGNUP POPUP -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Modal -->
+	<div class="modal fade file-error-modal" id="emp-img-type-error-modal" tabindex="-1" role="dialog" aria-labelledby="emp-img-type-error-modal">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header modal_conf_header">
+          <img src="/static/images/aptahr.png">
+					<button type="button" class="close modal_conf_close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+        <div class="modal-body modal_conf_body">
+          <div class="row">
+            <div class="col-sm-9">
+              <p class="text-danger" style="margin-bottom:0;">
+                Please Select file type of .jpeg / .jpg or .png only.
+              </p>
+            </div>
+            <div class="col-sm-3">
+              <img src="/static/images/mascot.png" class="modal_conf_masct" style="">
+            </div>
+          </div>
+        </div>
+			</div>
+		</div>
+    </div>
+
+    <div class="modal fade" id="signup-signin-notify-modal" tabindex="-1" role="dialog" aria-labelledby="signup-signin-notify-modal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-body">
+                <div style="position: absolute;left: 30px;top: 55px;">
+                	<img src="/static/images/mascot.png" style="width: 70px;">
+                	<!-- <span style="vertical-align: top;">Hello</span> -->
+                </div>
+                    <p class="">Do you already have an account.</p>
+                    <p><a href="/" class="btn common-btn">Sign In</a></p>
+                    <p><span class="leftrightdivider">Or</span></p>
+                    <p>I'm new user</p>
+                    <p><a data-dismiss="modal" aria-label="Close" class="btn common-btn">Sign Up</a></p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block java_script %}
+
+
+<!-- for signup and signin notification modal -->
+{% if 'pricing' in request.META.HTTP_REFERER %}
+<script type="text/javascript">
+    setTimeout(function(){$('#signup-signin-notify-modal').modal('show');}, 100);
+    $('#signup-signin-notify-modal').modal({backdrop: 'static', keyboard: false});
+</script>
+{% endif %}
+<!-- for signup and signin notification modal -->
+
+<script>
+    $(".toggle-password").click(function() {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+        input.attr("type", "text");
+        } else {
+        input.attr("type", "password");
+        }
+    });
+</script>
+<script>
+    $("#id_contact_no").keypress(function (evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    });
+
+    var lenght=0;var letter=0;var capital=0;var number=0;var space=0; var b=1;
+    $(document).ready(function(){
+
+        $('#id_password1').keyup(function() {
+            var pswd = $(this).val();
+
+            //validate the length
+            if ( pswd.length < 8 ) {
+                $('#length').removeClass('valid').addClass('invalid');
+                lenght=1;
+            } else {
+                $('#length').removeClass('invalid').addClass('valid');
+                lenght=0;
+            }
+
+            //validate letter
+            if ( pswd.match(/[a-z]/) ) {
+                $('#letter').removeClass('invalid').addClass('valid');
+                letter=0;
+            } else {
+                $('#letter').removeClass('valid').addClass('invalid');
+                letter=1;
+            }
+
+            //validate capital letter
+            if ( pswd.match(/[A-Z]/) ) {
+                $('#capital').removeClass('invalid').addClass('valid');
+                capital=0;
+            } else {
+                $('#capital').removeClass('valid').addClass('invalid');
+                capital=1;
+            }
+
+            //validate number
+            if ( pswd.match(/\d/) ) {
+                $('#number').removeClass('invalid').addClass('valid');
+                var number=0;
+            } else {
+                $('#number').removeClass('valid').addClass('invalid');
+                var number=1;
+            }
+
+            //validate space
+            if ( pswd.match(/[^a-zA-Z0-9]/) ) {
+                $('#space').removeClass('invalid').addClass('valid');
+                space=0;
+            } else {
+                $('#space').removeClass('valid').addClass('invalid');
+                space=1;
+            }
+            if (lenght==0 && letter==0 && capital==0 && number==0 && space==0){
+                b=0
+            }
+            else{
+                b=1
+            }
+
+        }).focus(function() {
+            $('#pswd_info').show();
+        }).blur(function() {
+            $('#pswd_info').hide();
+        });
+
+    });
+
+    $('.tooltiptext1').hide();
+	// $('#id_company_logo').change(function () {
+ //        if ($(this).val()) {
+ //          $('#register-frm-sub').prop("disabled", false);
+ //          $('.tooltiptext1').hide();
+ //        }
+ //        else {
+ //          $('#register-frm-sub').prop("disabled", true);
+ //            $('.tooltiptext1').show();
+ //        }
+ //    });
+
+	// $("#register-frm-sub").attr('disabled',true);
+	var _validFileExtensions_img = [".jpeg", ".jpg",".png"];
+
+    function Validateimgupload(oInputimg) {
+
+        if (oInputimg.type == "file") {
+
+
+
+            var sFileName = oInputimg.value;
+
+
+
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions_img.length; j++) {
+                    var sCurExtension = _validFileExtensions_img[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        blnValid = true;
+                        break;
+                    }
+                }
+                if (!blnValid) {
+                        setTimeout(function(){$('#emp-img-type-error-modal').modal('show');}, 100);
+                        $('#emp-img-type-error-modal').modal({backdrop: 'static', keyboard: false});
+                        $(".emp-img-err-desc").addClass("after_modal_appended");
+                        $('.modal-backdrop').appendTo('.emp-img-err-desc');
+                    oInputimg.value = "";
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+</script>
+
+<script type="text/javascript">
+
+$(".registration-sec-blk2").hide();
+$(".btn-next1").click(function(e){
+
+	if ($('#id_first_name').val() && $('#id_last_name').val() && $('#id_email').val() && $('#id_password1').val() && $('#id_password2').val()) {
+	    if(lenght==1 && letter==1 && capital==1 && number==1 && space==1){
+
+        }
+        else{
+            $(".registration-sec-blk1").hide();
+            $(".registration-sec-blk2").show();
+        }
+        document.getElementById('common-error').innerHTML = '';
+	}
+	else
+		document.getElementById('common-error').innerHTML = 'Please fill empty fields';
+	$(".tooltipbtnerrortext").show();
+	e.preventDefault();
+});
+
+$(".btn-prev2").click(function(e){
+    $(".registration-sec-blk2").hide();
+    $(".registration-sec-blk1").show();
+    e.preventDefault();
+});
+$("#profilehd").hide();
+
+
+  $('.tooltippass img').bind('mouseover', function() {
+      $(".tooltipconf img").hide();
+  });
+
+  $(".tooltippass img").mouseleave(function(){
+      $(".tooltipconf img").show();
+  });
+
+
+
+$(".tooltipbtnerrortext").hide();
+
+
+</script>
+
+<script type="text/javascript">
+    var k=1;var l=1;var i=1;var j=1;
+    var num = new RegExp("[0-9]+");
+    var ucase = new RegExp("[A-Z]+");
+    var lcase = new RegExp("[a-z]+");
+    $("#id_password1").keyup(function(){
+        if(ucase.test($("#id_password1").val()) || lcase.test($("#id_password1").val())){
+            if($("#id_password1").val().length >= 8){
+                $("#password_message1").text("");
+                l=0;
+            }
+            else{
+                l=1;
+                // $("#password_message1").text("Password must be at least 8 characters");
+            }
+        }
+        else{
+            l=1;
+            // $("#password_message1").text("Password must contain alphabets");
+        }
+
+
+        if(k==0 && l==0){
+            $("#basicinfo_sub").attr("disabled",false);
+            $('.tooltipbtnerrortext').hide();
+        }
+        else{
+            $("#basicinfo_sub").attr("disabled",true);
+            $('.tooltipbtnerrortext').show();
+        }
+    });
+
+
+    $(".commonpasswordfield").keyup(function(){
+        if($("#id_password1").val() == $("#id_password2").val()){
+            if($("#id_password1").val().length >= 8){
+                k=0;
+            }
+            $("#password_message2").text("");
+        }else{
+            k=1
+            if($("#id_password2").val())
+            $("#password_message2").text("Password does not match");
+        }
+
+
+        if(k==0 && l==0 && j==0 && b==0){ // j value
+            $("#basicinfo_sub").attr("disabled",false);
+            $('.tooltipbtnerrortext').hide();
+            $("#lblisvalidpassworderr").text("");
+        }
+        else{
+            if(b==0){
+                $('#pswd_info').hide();
+                $("#lblisvalidpassworderr").text("");
+                }
+            else
+            {
+                $('#pswd_info').show();
+                $("#lblisvalidpassworderr").text("Password does not meet the criteria");
+                $("#password_message1").text("");
+            }
+            $("#basicinfo_sub").attr("disabled",true);
+            $('.tooltipbtnerrortext').show();
+        }
+    });
+
+
+
+/* Email Validation JavaScript  */
+$("#id_email").keyup(function () {
+      var email = $(this).val();
+      $.ajax({
+          url: '{% url "validate_email" %}',
+          data: {
+              'email': email
+            },
+            dataType: 'json',
+            success: function (data) {
+              if (data.is_taken) {
+                $('#email_message').css('color', 'red');
+                document.getElementById('email_message').innerHTML = "Email already exist";
+
+                    j=1;
+                    $("#basicinfo_sub").attr("disabled",true);
+                  $('.tooltipbtnerrortext').show();
+                }
+                else{
+                  j=0;
+                    if(k==0 && l==0 && i==0 && j==0){
+                        $("#basicinfo_sub").attr("disabled",false);
+                        $('.tooltipbtnerrortext').hide();
+                    }
+                    else{
+
+                    }
+                }
+                 }
+          });
+
+  });
+
+    // $("#id_email").keyup(function () {
+    //   var email = $(this).val();
+    //   console.log(email);
+    //   $.ajax({
+    //     url: '/ajax/validate_email/',
+    //     data: {
+    //       'email': email
+    //     },
+    //     dataType: 'json',
+    //     success: function (data) {
+    //       if (data.is_taken) {
+    //         $('#email_message').css('color', 'red');
+    //         document.getElementById('email_message').innerHTML = "Email already exist";
+    //
+    //             j=1;
+    //             $("#basicinfo_sub").attr("disabled",true);
+	  //           $('.tooltipbtnerrortext').show();
+    //         }
+    //         else{
+    //         	j=0;
+    //             if(k==0 && l==0 && i==0 && j==0){
+    // 		            $("#basicinfo_sub").attr("disabled",false);
+    // 		            $('.tooltipbtnerrortext').hide();
+    // 		        }
+    // 		        else{
+    //
+    // 		        }
+    //         }
+    //
+    //      }
+    //   });
+    //
+    // });
+
+    /* Email Validation JavaScript Ends */
+
+
+
+
+
+    $("#id_first_name").keyup(function () {
+        if (!$("#id_first_name").val()) {
+            $("#firstname_message").text("First name required");
+            $('.tooltipbtnerrortext').show();
+        }
+        else {
+            $("#firstname_message").text("");
+            $('.tooltipbtnerrortext').hide();
+        }
+    });
+
+    $("#id_last_name").keyup(function () {
+        if (!$("#id_last_name").val()) {
+            $("#lastname_message").text("Last name required");
+            $('.tooltipbtnerrortext').show();
+        }
+        else {
+            $("#lastname_message").text("");
+            $('.tooltipbtnerrortext').hide();
+        }
+    });
+
+
+
+
+        // $("#id_email").focusin(function () {
+        //     $("#email_message").text("");
+        // });
+
+    $("#id_email").keyup(function () {
+            var email = $('#id_email').val().toLowerCase();
+            var reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{3,3})?$/;
+
+            if($("#id_email").val()){
+                if (reg.test(email)){
+
+                	$("#email_message").text("");
+                   	$("#basicinfo_sub").attr("disabled",false);
+                	$('.tooltipbtnerrortext').hide();
+                	// var reg1 = /^([\w-\.]+@(?!brinkvideo.win)(?!brink)(?!blinkvideo.win)(?!.win)([\w-]+\.)+[\w-]{2,4})?$/;
+
+                	// if (reg1.test(email)){
+
+                	// }
+                	// else{
+
+	                // 	$("#email_message").text("");
+
+	                // }
+                }
+                else{
+
+                    // $("#email_message").text("Enter valid email id");
+
+                }
+            }
+            else{
+                $("#email_message").text("Email required");
+            }
+        });
+
+        $('#basicinfo_sub').click(function(){
+
+
+            if(!$("#id_first_name").val()){
+                $("#firstname_message").text("First name required");
+
+            }
+            else{
+                $("#firstname_message").text("");
+
+            }
+            if(!$("#id_last_name").val()){
+                $("#lastname_message").text("Last name required");
+
+            }
+            else{
+                $("#lastname_message").text("");
+
+            }
+            if(!$("#id_password1").val()){
+                $("#password_message1").text("Password required");
+
+            }
+            else{
+               $("#password_message1").text("");
+
+            }
+            if(!$("#id_password2").val()){
+                $("#password_message2").text("Confirm password required");
+            }
+            else{
+                $("#password_message2").text("");
+            }
+            if(!$("#id_email").val()){
+                $("#email_message").text("Email required");
+
+            }
+            else{
+                $("#email_message").text("");
+
+            }
+
+            if($("#id_first_name").val() && $("#id_last_name").val() && $("#id_password1").val() && $("#id_password2").val() && $("#id_email").val()){
+
+                if(lenght==1 && letter==1 && capital==1 && number==1 && space==1){
+
+                }
+                else{
+                    $(".registration-sec-blk1").hide();
+                    $(".registration-sec-blk2").show();
+    				$('.tooltipbtnerrortext').hide();
+                }
+            }
+
+
+
+            var email = $('#id_email').val().toLowerCase();
+            var reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{3,3})?$/;
+
+            if (reg.test(email)){
+
+                var reg1 = /^([\w-\.]+@(?!brinkvideo.win)(?!brink)(?!blinkvideo.win)(?!blinkvideo.com)(?!.win)([\w-]+\.)+[\w-]{2,4})?$/;
+
+                	if (reg1.test(email)){
+                		return 0;
+	                }
+                	else{
+
+	                	$("#email_message").text("");
+	                	$(".registration-sec-blk1").show();
+                		$(".registration-sec-blk2").hide();
+	                	return false;
+	                }
+
+            }
+            else{
+                $("#email_message").text("Enter valid email id");
+                $(".registration-sec-blk1").show();
+                $(".registration-sec-blk2").hide();
+                return false;
+            }
+
+
+        });
+</script>
 {% endblock %}
