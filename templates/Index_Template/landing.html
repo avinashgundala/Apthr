@@ -101,8 +101,10 @@
 
 
                           </div> -->
+                          <div class="pf-field custom-select-style">
                           {{ feedback_form.subject }}
                           <label class="text-red" id="lblsubjecterror"></label>
+                          </div>
                         </div>
                       </div>
                       <div class="row">
@@ -209,13 +211,15 @@
                   {% csrf_token %}
 									<div class="cfield">
 								<!--		<input type="email" name="email" maxlength="254" placeholder="Email" id="id_email" class="input"> -->
-                {{ login_form.email }}
+                <!-- {{ login_form.email }} -->
+                <input type="email" name="email" class="form-control" autocomplete="nope" placeholder="Email address" required="" id="id_email">
 										<i class="la la-envelope"></i>
 										<label class="error" id="email_message" for="id_email"></label>
 									</div>
 									<div class="cfield">
 								<!--		<input type="password" name="password" placeholder="Password" id="id_password" class="input"> -->
-                {{ login_form.password }}
+                <!-- {{ login_form.password }} -->
+                <input type="password" name="password" class="form-control" autocomplete="new-password" placeholder="*************" required="" id="id_password">
 										<i class="la la-key"></i>
 										<label class="error" id="password_message" for="id_password"></label>
 									</div>
@@ -277,33 +281,6 @@ $(".starrr").hover(function(){
   }
 });
 
-$("#id_subject").change(function(){
-       if(!$("#id_subject").val()){
-           $("#lblsubjecterror").text("This field is required");
-       }
-       else{
-           $("#lblsubjecterror").text("");
-
-       }
-});
-
-$("#id_message").keyup(function(){
-  if(!$("#id_message").val()){
-    $("#lblshareerror").text("This field is required");
-  }
-  else{
-    $("#lblshareerror").text("");
-  }
-});
-
-$("#id_name").keyup(function(){
-  if(!$("#id_name").val()){
-    $("#lblnameerror").text("This field is required");
-  }
-  else{
-    $("#lblnameerror").text("");
-  }
-});
 
 $("#btnratingfrm").click(function(e){
 
@@ -317,32 +294,7 @@ $("#btnratingfrm").click(function(e){
   }
 
 
-  if(!$("#id_subject").val()){
-    $("#lblsubjecterror").text("This field is required");
-
-  }
-  else{
-     $("#lblsubjecterror").text("");
-
-  }
-
-
-  if(!$("#id_message").val()){
-    $("#lblshareerror").text("This field is required");
-  }
-  else{
-    $("#lblshareerror").text("");
-  }
-
-  if(!$("#id_name").val()){
-    $("#lblnameerror").text("This field is required");
-  }
-  else{
-    $("#lblnameerror").text("");
-  }
-
-
-  if ($('#ratings-hidden').val() && $('#id_subject').val() && $('#id_message').val() && $('#id_name').val()) {
+  if ($('#ratings-hidden').val()) {
     return true;
   }
   else{
@@ -374,71 +326,6 @@ $("#btnratingfrm").click(function(e){
 		        input.attr("type", "password");
 		        }
 		    });
-		</script>
-
-		<script type="text/javascript">
-
-
-
-		    $("#id_email").keyup(function () {
-		    	if (!$("#id_email").val()) {
-		            $("#email_message").text("Email required");
-
-		        }
-		        else {
-		            $("#email_message").text("");
-
-		        }
-		    });
-
-		    $("#id_password").keyup(function () {
-			    if (!$("#id_password").val()) {
-		            $("#password_message").text("Password required");
-
-		        }
-		        else {
-		            $("#password_message").text("");
-
-		        }
-		    });
-
-		    $('#btnsub-login_p').click(function(){
-
-	            if(!$("#id_email").val()){
-	                $("#email_message").text("Email required");
-
-	            }
-	            else{
-	                $("#email_message").text("");
-
-	            }
-
-	            var email = $('#id_email').val().toLowerCase();
-	            var reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-
-	            if (reg.test(email)){
-
-	            }
-	            else{
-	                $("#email_message").text("Enter valid email id");
-	                return false;
-	            }
-
-	            if (!$("#id_password").val()) {
-		            $("#password_message").text("Password required");
-		        }
-		        else {
-		            $("#password_message").text("");
-		        }
-
-	            if($("#id_password").val() && $("#id_email").val()){
-
-	            }
-	            else{
-	            	return false;
-	            }
-
-	        });
 		</script>
 		<script type="text/javascript">
 			var vid = document.getElementById("player");

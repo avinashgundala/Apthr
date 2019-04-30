@@ -128,17 +128,16 @@ def validate_email(request):
 def landingpage(request):
 
     if request.POST:
-        form_type = request.POST.get('form_name',None)
+        form_type = request.POST.get('form_name','')
         if form_type == 'feedback':
-            form = FeedBackForm(request.POST)
-            if form.is_valid():
-                feedback_form = form.save(commit= False)
-                feedback_form.save()
+            feedback_form = FeedBackForm(request.POST)
+            if feedback_form.is_valid():
+                feedback = feedback_form.save(commit= False)
+                feedback.save()
                 #------------- mailing to admin ----#
-                print(feedback_form.email)
                 mail_subject_admin = ""
                 message_admin = render_to_string('Email_Template/aptahr_admin_feedback_email.html',{
-                                                    'feedback':feedback_form
+                                                    'feedback':feedback
                 })
                 to_email = list(User.objects.filter(is_staff=True).values_list('email',flat=True))
                 email = EmailMultiAlternatives(mail_subject_admin,message_admin,to=to_email)
@@ -148,21 +147,21 @@ def landingpage(request):
 
                 mail_subject_user = ""
                 message_user = render_to_string('Email_Template/aptahr_user_feedback_email.html',{
-                                        'feedback':feedback_form
+                                        'feedback':feedback
                 })
-                to_email_user = feedback_form.email
+                to_email_user = feedback.email
                 email_user = EmailMultiAlternatives(mail_subject_user,message_user,to=[to_email_user])
                 email_user.attach_alternative(message_user,"text/html")
                 email_user.send()
-                return redirect('')
+                return redirect('landingpage')
             else:
                 feedback_form = FeedBackForm()
         elif form_type == 'loginform':
-            form = LoginForm(request.POST)
-            if form.is_valid():
-                email = form.cleaned_data['email']
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                email = login_form.cleaned_data['email']
                 email = email.lower()
-                password =  form.cleaned_data['password']
+                password =  login_form.cleaned_data['password']
                 user = authenticate(username=email, password=password)
                 if user is not None:
                     if user.is_active:
@@ -177,13 +176,13 @@ def landingpage(request):
                                 return redirect(request.GET['next'])
                             return redirect('dashboard')
                         else:
-                            return redirect('login')
+                            return redirect('landingpage')
                     else:
                         messages.add_message(request,messages.ERROR,'Your Account is not Activated admin will active your account with in 24 hours.')
                 else:
                     messages.add_message(request,messages.ERROR,'Your Email or Password is Incorrect.')
             else:
-                 form = LoginForm()
+                 login_form = LoginForm()
         else:
             feedback_form = FeedBackForm()
             login_form = LoginForm()
@@ -217,8 +216,8 @@ def activationemail(request):
             email = activationform.cleaned_data['email']
             try:
                 user = User.objects.get(email = email)
-            except ValueError:
-                raise print
+            except user.DoesNotExist:
+                raise messages.error(request,'Email address Does not exit')
             current_site = get_current_site(request)
             mail_subject = 'Activate your Account'
             message = render_to_string('Email_Template/aptahr_activation_link.html',{
@@ -232,7 +231,7 @@ def activationemail(request):
             email_to.attach_alternative(message,"text/html")
             email_to.send()
             messages.success(request,'Email Sent successfully')
-            return redirect('')
+            return redirect('register_resent_active')
 
     else:
         activationform = ActivationEmailForm()
